@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let name=['sanju','anju']
+        // name.push('mike')
+        // console.log(name)
+        // let num=[1,2,3]
+        // num.push(4)
+        // console.log(num)
+        let names=[]
+        function add(){
+          let name=document.getElementById('name').value 
+          names.push(name)
+          str=''
+          names.map(value=>{
+            str=str+value+'<br>'
+          })
+          data.innerHTML=str
+        }    
+        </script>
+    <h1>Data Entry Form</h1>
+    <p><input type="text" id="name" placeholder="enter name"></p>
+    <p><input type="email" id="email" placeholder="enter email"></p>
+    <p><input type="password" id="password" placeholder="enter password"></p>
+    <p><input type="datetime-local" id="dob" placeholder="enter dob"></p>
+    <button onclick="add()">Add</button>
+    <div id="data">
+    </div>
+</body>
+</html>

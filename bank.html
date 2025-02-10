@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let users=[]
+        let uname=''
+        let uemail=''
+        let cb=0
+        function home(){
+            let str=`
+            <h2> Welcome ${uname}</h2>
+            <button onclick=s()>Log out</button>
+            <p><input type='number' id="amount" placeholder="enter amount"></p>
+            <p><select id='type'>
+                <option value=0>--Select--</option>
+                <option value=1>Deposit</option>
+                <option value=2>Withdraw</option>
+                <option value=3>Transfer</option>
+                </select></p>
+                <p><select id='seluser'></select></p>
+                <p><input type='number' id='amount' placeholder='enter amount'></p>
+                <button onclick='abc()'>submit</button>
+                <p>Current balance :<span id='spanbal'>${cb}</span></p>
+                `
+            
+            root.innerHTML=str
+        }
+        function add(){
+            let n=document.getElementById('name').value 
+            let mail=document.getElementById('email').value
+            let p=document.getElementById('pass').value
+            let dob=document.getElementById('dob').value
+            let user={
+                name:n,
+                email:mail,
+                password:p,
+                dob:dob,
+                balance:0
+            }
+            users.push(user)
+            s()
+        }
+        function a(){
+            let str=`
+             <div>
+                 <h2>Registration Form</h2>
+                 <p><input type='text' id='name' placeholder='enter name'></p>
+                 <p><input type='email' id='email' placeholder='enter email'></p>
+                 <p><input type='password' id='pass' placeholder='enter password'></p>
+                 <p><input type='date' id='dob' placeholder='enter dob'></p>
+                 <p><button onclick='add()'>Register</button></p>
+                <p> Already have a member?<button onclick='s()'> Log In Here</button>
+            </div>
+
+            ` 
+        root.innerHTML=str
+      }
+        function s(){
+            let str=`
+             <div>
+                <h1>HDFC BANK</h1>
+                <hr>
+                 <h2>Login Form</h2>
+                 <div id='msg'></div>
+                 <p><input type='email' id='email'></p>
+                 <p><input type='password' id='password'></p>
+                 <button onclick='w()'>Log In</button>
+                 <p><button onclick='a()'>Create account</button></p>
+            </div>    
+            `
+            root.innerHTML=str
+        } 
+        function w() {
+            let mail=document.getElementById('email').value 
+            let password=document.getElementById('password').value
+            for(let i=0;i<users.length;i++){
+                if(users[i].email==mail && users[i].password==password){
+                    uemail=mail
+                    uname=users[i].name
+                    cb=users[i].balance
+                  home()
+                }
+                else{
+                    msg.innerHTML='Access Denied'
+                }
+
+            }
+        }  
+        function abc(){
+           let a=parseInt(document.getElementById('amount').value)
+           let t=parseInt(document.getElementById('type').value)
+           for(let i=0;i<users.length;i++)
+           if(users[i].email==uemail){
+            if(t==1){
+              users[i].balance+=a
+           } 
+           else if(t==2){
+                if (a<cb){
+               users[i].balance-=a
+                }
+                else{
+                  spanbal.innerHTML='Insufficient funds'
+                  break
+                }
+           }
+            spanbal.innerHTML=users[i].balance
+           }
+           
+        }
+        
+    </script>
+</head>
+<body onload="s()">
+    <div id="root"></div>
+    <hr>
+    <h5>@Copyright 2005.All rights reserved</h5>
+</body>
+</html>

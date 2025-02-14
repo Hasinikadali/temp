@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const products = [
+        { id: 1, name: "P1", price: 34 },
+        { id: 2, name: "P2", price: 50 },
+        { id: 3, name: "P3", price: 40 },
+      ];
+      const cart={
+
+      } 
+      const atc=(id)=>{
+        // const test={}
+        // test['cathy']=45
+        // console.log(test)
+        // test['john']=32
+        // console.log(test)
+        // test['john']=54
+        // console.log(test)
+        // console.log(cart)
+        const obj={apple:1,mango:2}
+        if(obj['apple']){
+            obj['apple']=obj['apple']+1
+        }
+        else{
+            console.log("Does not exist")
+        }
+        console.log(obj)
+      }
+      const show = () => {
+        let str = ""
+        products.map((value) => {
+           str += `<div>${value.id}-${value.name}-${value.price}-<button onclick="atc(${value.id})">Add to Cart</button></div>`
+        });
+        pp.innerHTML = str
+      };
+    </script>
+  </head>
+  <body onload="show()">
+    <h1>My Store</h1>
+    <hr />
+    <h3>Products</h3>
+    <div id="pp"></div>
+    <h3>My Cart</h3>
+    <div id="ppp"></div>
+  </body>
+</html>

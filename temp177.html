@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function cc(){
+           let color=document.getElementById('txt').value 
+           ct.style.color=color
+           let c=document.getElementById('type').value 
+           ct.style.background=c
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="txt">
+    <p><select id='type'>
+        <option value>--Select--</option>
+        <option value="blue">blue</option>
+        <option value="green">green</option>
+        <option value="red">Red</option>
+        </select>
+    <button onclick="cc()">Submit</button>
+    <div id="ct">Hello World</div>
+</body>
+</html>

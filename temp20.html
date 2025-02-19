@@ -12,35 +12,66 @@
       ];
       const cart = {};
       const addToCart = (id) => {
-        cart[id] = 1;
+        if(!cart[id]){
+        cart[id]=1
+        }
+        
         showCart();
+        // items.innerHTML=0
       };
       const increment=(id)=>{
+        
          cart[id]=cart[id]+1
          showCart()
+        //  items.innerHTML=100
       }
-      const dcrement=(id)=>{
+      const decrement=(id)=>{
          cart[id]=cart[id]-1
          showCart()
+        //  items.increment=50
+      }
+      const dis=()=>{
+        cartb.style.display="block"
+        pb.style.display="none"
+      }
+      const hideCart=()=>{
+        cartb.style.display='none'
+        pb.style.display='block'  
+      }
+      const del=(id)=>{
+        delete cart[id]
+        showCart()
+      }
+      const showTotal=()=>{
+          let total=products.reduce((sum,value)=>{
+            return sum +value.price*(cart[value.id]??0)
+          },0
+        )
+          order.innerHTML=total 
       }
       const showCart = () => {
+        let count=Object.keys(cart).length
+        items.innerHTML=count
+        showTotal()
         let str = "";
+        let c=0
         products.map((value) => {
             if (cart[value.id]) {
             str += `<div>
             ${value.id}-${value.name}-${value.price}-
             <button onclick='decrement(${value.id})'>-</button>
             ${cart[value.id]}
-            <button onclick='increment(${value.id})>+</button>-
-            ${value.price*cart[value.id]}</div>`;
+            <button onclick='increment(${value.id})'>+</button>-
+            ${value.price*cart[value.id]}
+            <button onclick="del(${value.id})">Delete</button></div>`;
           }
         });
-        divCart.innerHTML = str;
+        divCart.innerHTML = str;      
       };
       const showProducts = () => {
         let str = "";
         products.map((value) => {
-          str += `<div>${value.id}-${value.name}-${value.price}-<button onclick='addToCart(${value.id})'>Add to Cart</button></div>`;
+          str += `<div>${value.id} - ${value.name} - ${value.price}- <button onclick='addToCart(${value.id})'>Add</button></div>`;
         });
         divProducts.innerHTML = str;
       };
@@ -48,10 +79,17 @@
   </head>
   <body onload="showProducts()">
     <h1>My Store</h1>
+      <h4 onclick="dis()">Cart:<span id='items'></span></h4>
     <hr />
+    <div id="pb">
     <h3>Products</h3>
     <div id="divProducts"></div>
+  </div>
+    <div id="cartb" style="display: none">
     <h3>My Cart</h3>
     <div id="divCart"></div>
+    <h2>Order value:<span id='order'></span></h2>
+    <button onclick="hideCart()">Close</button>
+  </div>
   </body>
 </html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:white;
+        }
+        .c{
+            background-color:whitesmoke;
+            border-radius: 20px;
+            padding: 20px;
+            width:400px;
+            margin:auto;
+        }
+        .r{
+            display: flex;
+            justify-content: center;
+        }
+        .title{
+            font-size:30px;
+        }
+        .header {
+            font-size: 50px;
+            color: rgb(54, 54, 199);
+            font-weight: bold;
+            font-family: Verdana;
+
+        }
+        .cap{
+            font-size: 20px;
+            color: gray;
+            text-align: center;
+        }
+        input,select{
+            width:100%;
+            padding: 5px;
+            margin:5px;
+            border-radius: 5px;
+            border:2px solid gray;
+        }
+        .btn{
+            background-color: rgb(7, 137, 7);
+            color: white;
+            font-size: 20px;
+            padding: 5px;
+            border-radius: 2px;
+            width: 100px;
+            border: none;
+        }
+
+        .leftcap{
+            color:gray;
+            margin-left:5px;
+            font-size: 15px;
+        }
+        .rClass {
+        border: 1px solid gray;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: 5px;
+        border-radius: 5px;
+        padding: 3px;
+      }
+      .qMark {
+        background-color: green;
+        border-radius: 5px;
+        color: white;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin: 2px;
+      }
+    </style>
+</head>
+<body>
+    <div class="c">
+        <div class="r">
+            <div class="header">facebook</div>
+        </div>
+        <div class="r">
+            <div>
+            <div class="title">Create a new account</div>
+            <div class="cap">It's quick and easy.</div>
+        </div>
+        </div>
+        <hr>
+        <div id="r"></div>
+    </div>
+    <script>
+        const s=()=>{
+        let fn=document.getElementById('fn').value
+        let sn=document.getElementById('sn').value
+        let day=document.getElementById('day').value
+        let month=document.getElementById('month').value
+        let year=document.getElementById('year').value
+        let e=document.getElementById('e').value
+        let p=document.getElementById('p').value
+        let gender=document.getElementsByName('gender')
+        let pro=document.getElementById('prSelect').value
+         let dob = `${day}-${month}-${year}`
+        let g=''
+        if(gender[0].checked) g="Female"
+        if(gender[1].checked) g="Male"
+        if(gender[2].checked) g=pro
+        let str=`
+        <div>
+            <p>Name:${fn} ${sn}</p>
+            <p>Date of Birth:${dob}</p>
+            <p>Gender:${g}</p>
+            <p>Email/Mobile Number:${e}<p>
+            <p>Password:${p}</p>
+            <p><button class='btn' onclick="sf('${fn}','${sn}','${day}','${month}','${year}','${g}','${e}','${p}')">Edit</button>
+            <button class='btn' onclick='msg()'>Confirm</button></p>
+        </div>`
+        r.innerHTML=str    
+    }
+    const msg=()=>{
+        r.innerHTML="Your account is created"
+    }
+    const sf=(fn="",sn="",day="",month="",year="",g="",e="",p="")=>{
+        let str=`
+        <div class="r">
+            <input type="text" id="fn" placeholder="Firstname" value='${fn}'>
+            <input type="text" id='sn' placeholder="Surname" value='${sn}'>
+        </div>
+        <div class="r" style="justify-content: start;">
+            <div class="leftcap">Date of Birth<span class="qMark"
+                ><abbr title="Click for more information">?</abbr></span
+              ></div>
+        </div>
+        <div class="r">
+            <select id="day" value='${day}'></select>
+            <select id="month" value='${month}'></select>
+            <select id="year" value='${year}'></select>
+        </div>
+        <div class="r"  style="justify-content: start;">
+            <div class="leftcap">Gender<span class="qMark"
+                ><abbr title="Click for more information">?</abbr></span
+              ></div>
+        </div>
+        <div class="r">
+            <div class="rClass">
+                <div><label> Female</label></div>
+                <div><input type="radio" name="gender" onclick="tog()" ${gender==='Female'?checked:''}/></div>
+              </div>
+              <div class="rClass">
+                  <div><label> Male</label></div>
+                      <div><input type="radio" name="gender" onclick="tog()" ${gender==='Male'?checked:''}/></div>
+              </div>
+              <div class="rClass">
+                  <div><label> Custom</label></div>
+                  <div><input type="radio" name="gender" onclick="tog()" ${gender!=='Female' && gender!=='Male' && gender!==''? checked:''}/></div>
+              </div>
+        </div>
+        <div class="r">
+            <select id="prSelect" style="display: none;">
+                <option>Select your pronoun</option>
+                <option>She:"Tell her about trip to Kerala" </option>
+                <option>He:"Tell him about trip to Kerala"</option>
+                <option>They:"Tell them about trip to Kerala"</option>
+            </select>
+
+        </div>
+        <div class="r">
+            <input type="text" id='e' placeholder="Mobile number or Email Address" value=${e}>
+        </div>
+        <div class="r">
+            <input type="password" id='p' placeholder="New password" value='${p}'>
+        </div>
+        <div class="r">
+            <button class="btn" onclick="s()">Sign Up</button>
+        </div>`
+        r.innerHTML=str
+    }
+    sf()
+    let str=''
+    for(let i=1;i<=31;i++){
+        str+=`<option>${i}</option>`
+    }
+    day.innerHTML=str
+    let sttr=['Jan','Feb','Mar','Apr','May','Jun','July','Aug','Sep','Oct','Nov','Dec']
+    let sttr1=[]
+    for(let i=0;i<=11;i++){
+        sttr1+=`<option>${sttr[i]}</option>`
+    }
+    month.innerHTML=sttr1
+    let str2=''
+    for(let i=1905;i<=2025;i++){
+        str2+=`<option>${i}</option>`
+    }
+    year.innerHTML=str2
+    const tog=()=>{
+        let p=document.getElementsByName('gender')
+        if(p[2].checked){
+            prSelect.style.display='block'
+        }
+        else{
+            prSelect.style.display='none'
+        }
+    }
+    </script>
+</body>
+</html>
